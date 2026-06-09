@@ -1,0 +1,402 @@
+/* =============================================
+   BAZAAR-OS Minimal Design System
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap');
+
+:root {
+  /* Ultra-Minimal Earthy Palette */
+  --bg-primary: #F7F5F0;     /* Ultra light cream */
+  --bg-secondary: #EBE6DF;   /* Slightly darker cream */
+  --bg-card: #FFFFFF;        /* Pure white for elevation */
+  --bg-elevated: #FFFFFF;
+
+  --text-primary: #2C1E16;   /* Deep charcoal brown */
+  --text-secondary: #5C4A3D; /* Mid brown/taupe */
+  --text-muted: #8A7A6E;     /* Light taupe */
+
+  --border-color: #D6CEC5;   /* Very faint taupe border */
+  --border-hover: #A39384;   /* Slightly darker hover */
+  --border-focus: #4A3324;
+
+  --color-primary: #8A411F;  /* Elegant rust */
+  --color-primary-light: #B88645; /* Soft gold */
+  --color-success: #3A4A33;  /* Deep muted green */
+  --color-danger: #8A3324;   /* Muted red */
+  
+  /* Booth Colors */
+  --booth-available-bg: #FFFFFF;
+  --booth-available-border: #D6CEC5;
+  --booth-available-text: #2C1E16;
+  
+  --booth-selected-bg: #F0E6DD;
+  --booth-selected-border: #8A411F;
+  --booth-selected-text: #8A411F;
+  
+  --booth-sold-bg: transparent;
+  --booth-sold-border: transparent;
+  --booth-sold-text: #BDB5AC; /* Faded out */
+
+  --booth-reserved-bg: #F5EFEB;
+  --booth-reserved-border: #D6CEC5;
+  --booth-reserved-text: #A39384;
+
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* Radii (Slightly softer for modern feel) */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows (Extremely subtle) */
+  --shadow-sm: 0 1px 2px rgba(44, 30, 22, 0.04);
+  --shadow-md: 0 4px 12px rgba(44, 30, 22, 0.06);
+  --shadow-lg: 0 12px 32px rgba(44, 30, 22, 0.08);
+
+  /* Transitions */
+  --transition-fast: 0.2s ease-out;
+  --transition-base: 0.3s ease-out;
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  
+  /* Modern UI 2.0: Organic Texture Overlay */
+  background-image: 
+    linear-gradient(rgba(247, 245, 240, 0.9), rgba(247, 245, 240, 0.9)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+}
+
+/* --- Typography --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-wrap: balance; /* Modern typography layout */
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); letter-spacing: -0.04em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+h3 { font-size: clamp(1.1rem, 2vw, 1.3rem); }
+
+p {
+  color: var(--text-secondary);
+  text-wrap: pretty;
+}
+
+a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+a:hover { opacity: 0.7; }
+
+/* --- Utilities --- */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.page {
+  padding: var(--space-2xl) 0;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: 14px 28px;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: #FFFFFF;
+}
+.btn-primary:hover {
+  background: #1A120E;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+.btn-outline:hover {
+  border-color: var(--text-primary);
+  background: var(--bg-card);
+}
+
+.btn-sm { padding: 8px 16px; font-size: 0.8rem; }
+.btn-lg { padding: 16px 36px; font-size: 1rem; }
+.btn-block { width: 100%; }
+
+/* --- Forms (Minimalist) --- */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+.input-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.input {
+  padding: 14px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  transition: border-color var(--transition-fast);
+  outline: none;
+}
+.input:focus {
+  border-bottom-color: var(--border-focus);
+}
+.input::placeholder { color: var(--border-color); }
+
+/* --- Map & Booths --- */
+.map-container {
+  width: 100%;
+  overflow-x: auto;
+  padding: var(--space-xl) 0;
+}
+
+.booth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  min-height: 60px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  user-select: none;
+  background: var(--booth-available-bg);
+  border: 1px solid var(--booth-available-border);
+  color: var(--booth-available-text);
+}
+
+.booth:hover {
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.booth-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.booth-price {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Sold State - Fade it out completely */
+.booth-sold {
+  background: var(--booth-sold-bg);
+  border: 1px solid transparent;
+  color: var(--booth-sold-text);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.booth-sold:hover {
+  border-color: transparent;
+}
+
+/* Selected State */
+.booth-selected {
+  background: var(--booth-selected-bg);
+  border-color: var(--booth-selected-border);
+  color: var(--booth-selected-text);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+  z-index: 10;
+}
+
+/* Walkway - No borders, just pure whitespace */
+.booth-walkway {
+  background: transparent;
+  border: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* --- Booking Modal Pop-up (Modern UI 2.0) --- */
+.booking-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 640px;
+  max-width: 95vw;
+  max-height: 90vh;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  transform: translate(-50%, -45%) scale(0.95);
+  transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              display 0.4s allow-discrete;
+  z-index: 200;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg), 0 24px 48px rgba(0,0,0,0.1);
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+}
+
+.booking-panel.open {
+  display: flex;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+
+  @starting-style {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+}
+
+.booking-panel-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(247, 245, 240, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 199;
+  display: none;
+  opacity: 0;
+  transition: opacity 0.4s ease, display 0.4s allow-discrete;
+}
+
+.booking-panel-overlay.open {
+  display: block;
+  opacity: 1;
+
+  @starting-style {
+    opacity: 0;
+  }
+}
+
+.booking-panel-close {
+  position: absolute;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+.booking-panel-close:hover { color: var(--text-primary); }
+
+.booking-total {
+  margin-top: auto;
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--border-color);
+}
+.booking-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+}
+.booking-total-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.booking-total-price {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+/* Animations */
+.animate-in {
+  animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .booking-panel { padding: var(--space-xl) var(--space-lg); }
+  .booth { min-width: 45px; min-height: 45px; }
+  .booth-label { font-size: 0.65rem; }
+  .booth-price { display: none; } /* Hide price on mobile grid to keep clean */
+}
