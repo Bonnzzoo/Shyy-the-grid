@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import { createEvent } from '../utils/eventService';
 
 const TEMPLATES = [
   { id: 'rows', name: 'Classic Rows', icon: '▤', desc: 'Standard bazaar rows with a central walkway', defaultRows: 6, defaultCols: 8 },
@@ -46,10 +47,26 @@ export default function CreateBazaar() {
     updateField('template', template);
   };
 
-  const handlePublish = () => {
-    // In production: POST to Supabase, generate slug
-    const slug = formData.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
-    setGeneratedLink(`bazaaros.com/b/${slug}`);
+  const handlePublish = async () => {
+    const slug = (formData.name || 'new-bazaar').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+    await createEvent({
+      name: formData.name || 'New Bazaar',
+      slug,
+      date: formData.date || 'TBD',
+      time: formData.time || '10:00 AM - 10:00 PM',
+      location: formData.location || 'TBD Location',
+      description: formData.description || 'Welcome to our brand new event!',
+      totalBooths: formData.totalBooths || 30,
+      soldBooths: 0,
+      organizer: 'New Organizer',
+      organizerId: 'org_lydia',
+      brandAccent: '#8B5E3C',
+      brandAccentLight: '#F6F0EB',
+      status: 'published',
+      currentPhase: 'priority_booking',
+      zones: formData.zones || []
+    });
+    setGeneratedLink(`${typeof window !== 'undefined' ? window.location.host : 'bazaaros.com'}/b/${slug}`);
     setStep(4);
   };
 
